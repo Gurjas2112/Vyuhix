@@ -15,3 +15,4 @@ Start with **What is Vyuhix?** if you have five minutes, and with **How it works
 | 09 | [Testing](09_testing.md) | know what is proven and how |
 | 10 | [Roadmap](10_roadmap.md) | see what level 2 and production add |
 | 11 | [Glossary](11_glossary.md) | look up EAL, VaR95, EPSS, KEV, ATT&CK, … |
+| 12 | [PS](ps.md) | read the PS document |
