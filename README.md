@@ -120,7 +120,6 @@ The full explanation is in [docs/02_how_it_works.md](docs/02_how_it_works.md), a
 ```
 Vyuhix/
 ├── README.md                         ← you are here
-├── COPILOT_PROMPT.md                 ← the prompt that builds this prototype with an AI coding assistant
 ├── backend/                          ← FastAPI + engine (Python)
 │   ├── vyuhix/                       model · montecarlo · engine · optimise · insurance · compliance
 │   │                                 ingest · copilot · auth · store · feeds · main (API)
