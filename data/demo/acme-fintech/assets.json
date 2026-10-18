@@ -1,0 +1,247 @@
+{
+  "nodes": [
+    {
+      "id": "internet",
+      "type": "entry",
+      "label": "Internet",
+      "tef": 0.25,
+      "note": "Serious, targeted exploitation attempts per year (demo prior)"
+    },
+    {
+      "id": "phishing",
+      "type": "entry",
+      "label": "Phished VPN user",
+      "tef": 0.5,
+      "note": "Successful credential phish of a VPN user per year (demo prior)"
+    },
+    {
+      "id": "residual",
+      "type": "entry",
+      "label": "Unmodelled routes",
+      "tef": 0.04,
+      "note": "Insider, zero-day and anything the scans cannot see (demo prior)"
+    },
+    {
+      "id": "edge",
+      "type": "asset",
+      "label": "edge · Apache 2.4.49",
+      "ip": "172.30.0.10",
+      "internet_facing": true,
+      "criticality": 4
+    },
+    {
+      "id": "bastion",
+      "type": "asset",
+      "label": "bastion · OpenSSH 8.9",
+      "ip": "172.30.0.11",
+      "internet_facing": true,
+      "criticality": 3
+    },
+    {
+      "id": "app",
+      "type": "asset",
+      "label": "app · Loans API",
+      "ip": "172.30.1.20",
+      "internet_facing": false,
+      "criticality": 5
+    },
+    {
+      "id": "cache",
+      "type": "asset",
+      "label": "cache · Redis",
+      "ip": "172.30.1.40",
+      "internet_facing": false,
+      "criticality": 2
+    },
+    {
+      "id": "db_secret",
+      "type": "secret",
+      "label": "DB password in /srv/app/.env"
+    },
+    {
+      "id": "app_admin",
+      "type": "identity",
+      "label": "DB role app_admin"
+    },
+    {
+      "id": "report_ro",
+      "type": "identity",
+      "label": "DB role report_ro (stale)"
+    },
+    {
+      "id": "customers",
+      "type": "crown_jewel",
+      "label": "customers table · 2,00,000 borrowers",
+      "profile": "pii_database",
+      "records": 200000
+    },
+    {
+      "id": "loan_ledger",
+      "type": "crown_jewel",
+      "label": "loan_ledger · disbursements",
+      "profile": "financial_ledger",
+      "records": 0
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "src": "internet",
+      "dst": "edge",
+      "type": "exploits",
+      "cve": "CVE-2021-41773",
+      "technique": "T1190",
+      "evidence": [
+        "nuclei:CVE-2021-41773",
+        "nmap:172.30.0.10:80"
+      ],
+      "text": "exploit Apache path traversal CVE-2021-41773 on edge"
+    },
+    {
+      "id": "e2",
+      "src": "edge",
+      "dst": "db_secret",
+      "type": "reads_secret",
+      "p": 0.35,
+      "technique": "T1552.001",
+      "evidence": [
+        "gitleaks:srv-app-env"
+      ],
+      "text": "discover the shared volume and read /srv/app/.env"
+    },
+    {
+      "id": "e3",
+      "src": "db_secret",
+      "dst": "app_admin",
+      "type": "authenticates_as",
+      "p": 1.0,
+      "technique": "T1078",
+      "evidence": [
+        "gitleaks:srv-app-env"
+      ],
+      "text": "log in to Postgres as app_admin"
+    },
+    {
+      "id": "e4",
+      "src": "app_admin",
+      "dst": "customers",
+      "type": "has_privilege",
+      "p": 1.0,
+      "technique": "T1213",
+      "evidence": [
+        "pg:app_admin:customers:SELECT"
+      ],
+      "text": "SELECT every row of customers"
+    },
+    {
+      "id": "e5",
+      "src": "internet",
+      "dst": "bastion",
+      "type": "exploits",
+      "cve": "CVE-2024-6387",
+      "technique": "T1190",
+      "evidence": [
+        "trivy:bastion:CVE-2024-6387",
+        "nmap:172.30.0.11:22"
+      ],
+      "text": "exploit OpenSSH CVE-2024-6387 on bastion"
+    },
+    {
+      "id": "e6",
+      "src": "bastion",
+      "dst": "report_ro",
+      "type": "reads_secret",
+      "p": 0.5,
+      "technique": "T1552.003",
+      "evidence": [
+        "gitleaks:bastion-bash-history"
+      ],
+      "text": "find report_ro password in .bash_history"
+    },
+    {
+      "id": "e7",
+      "src": "report_ro",
+      "dst": "loan_ledger",
+      "type": "has_privilege",
+      "p": 1.0,
+      "technique": "T1213",
+      "evidence": [
+        "pg:report_ro:loan_ledger:SELECT"
+      ],
+      "text": "read and tamper-stage loan_ledger"
+    },
+    {
+      "id": "e8",
+      "src": "report_ro",
+      "dst": "customers",
+      "type": "has_privilege",
+      "p": 1.0,
+      "technique": "T1213",
+      "evidence": [
+        "pg:report_ro:customers:SELECT"
+      ],
+      "text": "SELECT customers with a role unused for 412 days"
+    },
+    {
+      "id": "e9",
+      "src": "phishing",
+      "dst": "app",
+      "type": "valid_account",
+      "p": 0.35,
+      "technique": "T1078",
+      "evidence": [
+        "idp:vpn-mfa-disabled"
+      ],
+      "text": "sign in over VPN with phished credentials (no MFA)"
+    },
+    {
+      "id": "e10",
+      "src": "app",
+      "dst": "cache",
+      "type": "reaches",
+      "p": 0.9,
+      "technique": "T1210",
+      "evidence": [
+        "nuclei:redis-unauthenticated",
+        "nmap:172.30.1.40:6379"
+      ],
+      "text": "connect to Redis without authentication"
+    },
+    {
+      "id": "e11",
+      "src": "cache",
+      "dst": "app_admin",
+      "type": "reads_secret",
+      "p": 0.6,
+      "technique": "T1552",
+      "evidence": [
+        "redis:key:app-config"
+      ],
+      "text": "read cached DB DSN from Redis key app:config"
+    },
+    {
+      "id": "e12",
+      "src": "app",
+      "dst": "db_secret",
+      "type": "reads_secret",
+      "p": 1.0,
+      "technique": "T1552.001",
+      "evidence": [
+        "gitleaks:srv-app-env"
+      ],
+      "text": "read the app's own .env"
+    },
+    {
+      "id": "e13",
+      "src": "residual",
+      "dst": "customers",
+      "type": "residual",
+      "p": 1.0,
+      "technique": "—",
+      "evidence": [
+        "assumption:residual"
+      ],
+      "text": "reach customer data by a route the scans cannot see"
+    }
+  ]
+}

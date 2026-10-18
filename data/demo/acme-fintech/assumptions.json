@@ -1,0 +1,77 @@
+{
+  "_label": "Demo assumptions. Every value is editable in the UI and shown on screen as an assumption.",
+  "simulation": {
+    "n_years": 10000,
+    "seed": 20261031,
+    "max_hops": 6
+  },
+  "edge_probability": {
+    "kev_floor_internet": 0.9,
+    "exposure_internet": 1.0,
+    "exposure_internal": 0.3
+  },
+  "soc_multiplier": {
+    "enabled": true,
+    "max": 2.0,
+    "window_days": 7
+  },
+  "regulatory": {
+    "dpdp_enabled": true,
+    "dpdp_cap_inr": 2500000000,
+    "dpdp_enforce_prob": 0.1,
+    "note": "DPDP Board penalty powers apply from 13 May 2027; forward-looking toggle"
+  },
+  "profiles": {
+    "pii_database": {
+      "ir_inr": [
+        5000000,
+        15000000,
+        50000000
+      ],
+      "per_record_inr": [
+        20,
+        60,
+        150
+      ],
+      "downtime_hours": [
+        4,
+        24,
+        120
+      ],
+      "ransom_prob": 0.2,
+      "ransom_inr": [
+        5000000,
+        20000000,
+        100000000
+      ],
+      "regulatory_inr": [
+        5000000,
+        50000000,
+        500000000
+      ]
+    },
+    "financial_ledger": {
+      "ir_inr": [
+        1000000,
+        3000000,
+        10000000
+      ],
+      "fraud_inr": [
+        2000000,
+        15000000,
+        80000000
+      ],
+      "downtime_hours": [
+        8,
+        48,
+        168
+      ],
+      "ransom_prob": 0.25,
+      "ransom_inr": [
+        5000000,
+        25000000,
+        100000000
+      ]
+    }
+  }
+}

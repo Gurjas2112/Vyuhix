@@ -1,0 +1,1 @@
+{"host":"172.30.1.40","keys_sampled":["app:config","session:*"],"findings":[{"key":"app:config","contains":"DATABASE_URL (masked)","fingerprint":"app-config"}]}

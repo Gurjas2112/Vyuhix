@@ -1,0 +1,98 @@
+{
+  "controls": [
+    {
+      "id": "patch_edge_httpd",
+      "label": "Patch Apache on edge to 2.4.51+",
+      "cost_inr": 40000,
+      "effects": {
+        "e1": 0.0
+      },
+      "insurer": "patch_kev"
+    },
+    {
+      "id": "waf_virtual_patch",
+      "label": "WAF virtual patch for path traversal",
+      "cost_inr": 120000,
+      "effects": {
+        "e1": 0.3
+      }
+    },
+    {
+      "id": "rotate_vault_secret",
+      "label": "Move DB secret to a vault and rotate",
+      "cost_inr": 80000,
+      "effects": {
+        "e2": 0.0,
+        "e12": 0.0,
+        "e11": 0.0
+      }
+    },
+    {
+      "id": "least_privilege_app_role",
+      "label": "Row-level limits on app_admin (slows bulk export)",
+      "cost_inr": 60000,
+      "effects": {
+        "e4": 0.4
+      },
+      "insurer": "pam"
+    },
+    {
+      "id": "patch_bastion_openssh",
+      "label": "Patch OpenSSH on bastion",
+      "cost_inr": 30000,
+      "effects": {
+        "e5": 0.0
+      },
+      "insurer": "patch_kev"
+    },
+    {
+      "id": "remove_stale_role",
+      "label": "Remove stale report_ro role",
+      "cost_inr": 15000,
+      "effects": {
+        "e7": 0.0,
+        "e8": 0.0
+      }
+    },
+    {
+      "id": "mfa_vpn",
+      "label": "Enforce MFA on VPN and admins",
+      "cost_inr": 200000,
+      "effects": {
+        "e9": 0.1
+      },
+      "insurer": "mfa"
+    },
+    {
+      "id": "redis_auth",
+      "label": "Redis AUTH + bind to app only",
+      "cost_inr": 20000,
+      "effects": {
+        "e10": 0.0
+      }
+    },
+    {
+      "id": "edr_servers",
+      "label": "EDR on all servers",
+      "cost_inr": 600000,
+      "effects": {
+        "e2": 0.6,
+        "e6": 0.6,
+        "e11": 0.6,
+        "e12": 0.6,
+        "e13": 0.6
+      },
+      "insurer": "edr"
+    },
+    {
+      "id": "immutable_backups",
+      "label": "Immutable offline backups",
+      "cost_inr": 300000,
+      "magnitude": {
+        "downtime": 0.2,
+        "ransom": 0.3
+      },
+      "insurer": "backups"
+    }
+  ]
+}

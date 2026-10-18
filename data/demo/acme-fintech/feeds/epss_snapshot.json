@@ -1,0 +1,3 @@
+{"title":"Demo EPSS snapshot. Refresh from https://api.first.org/data/v1/epss","score_date":"2026-10-17","data":[
+ {"cve":"CVE-2021-41773","epss":0.94,"percentile":0.999},
+ {"cve":"CVE-2024-6387","epss":0.38,"percentile":0.97}]}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Synthetic demo output in Nmap XML format (external view, lab DMZ) -->
+<nmaprun scanner="nmap" args="nmap -sV -Pn -oX - 172.30.0.0/24" start="1792300000" version="7.95">
+  <host><status state="up"/><address addr="172.30.0.10" addrtype="ipv4"/>
+    <ports>
+      <port protocol="tcp" portid="80"><state state="open"/><service name="http" product="Apache httpd" version="2.4.49" extrainfo="(Unix)"/></port>
+    </ports>
+  </host>
+  <host><status state="up"/><address addr="172.30.0.11" addrtype="ipv4"/>
+    <ports>
+      <port protocol="tcp" portid="22"><state state="open"/><service name="ssh" product="OpenSSH" version="8.9p1 Ubuntu 3ubuntu0.6" extrainfo="Ubuntu Linux; protocol 2.0"/></port>
+    </ports>
+  </host>
+</nmaprun>

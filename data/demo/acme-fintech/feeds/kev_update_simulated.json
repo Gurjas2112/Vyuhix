@@ -1,0 +1,4 @@
+{"title":"SIMULATED KEV update for the drift demo. Not a real CISA catalogue entry.","simulated":true,"catalogVersion":"2026.10.18-sim","dateReleased":"2026-10-18T00:00:00Z","count":3,"vulnerabilities":[
+ {"cveID":"CVE-2021-41773","vendorProject":"Apache","product":"HTTP Server","vulnerabilityName":"Apache HTTP Server Path Traversal","dateAdded":"2021-11-03"},
+ {"cveID":"CVE-2021-42013","vendorProject":"Apache","product":"HTTP Server","vulnerabilityName":"Apache HTTP Server Path Traversal","dateAdded":"2021-11-03"},
+ {"cveID":"CVE-2024-6387","vendorProject":"OpenBSD","product":"OpenSSH","vulnerabilityName":"OpenSSH signal handler race (SIMULATED addition)","dateAdded":"2026-10-18"}]}

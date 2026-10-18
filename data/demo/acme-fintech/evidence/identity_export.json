@@ -1,0 +1,1 @@
+{"source":"Demo IdP export","vpn":{"users":46,"mfa_enforced":false},"admins":{"users":6,"mfa_enforced":false},"email":{"dmarc":"p=reject","spf":"pass"},"declared_controls":{"backups":"declared","ir_plan":"declared","edr":"absent"}}

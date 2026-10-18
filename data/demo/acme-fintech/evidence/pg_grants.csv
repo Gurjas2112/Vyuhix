@@ -1,0 +1,5 @@
+grantee,table_name,privilege_type,role_last_login_days
+app_admin,customers,SELECT,0
+app_admin,customers,UPDATE,0
+report_ro,loan_ledger,SELECT,412
+report_ro,customers,SELECT,412

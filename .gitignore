@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+# Node
+node_modules/
+frontend/dist/
+# Runtime state (recreated on start)
+data/runtime/
+# Capture temp
+app_screenshots_screen_recording/_video_tmp/
+# Env / secrets
+.env
+*.local

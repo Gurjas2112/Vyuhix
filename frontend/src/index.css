@@ -1,0 +1,38 @@
+@import "tailwindcss";
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+@import "@fontsource-variable/space-grotesk";
+@import "@xyflow/react/dist/style.css";
+
+@theme {
+  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+  --font-display: "Space Grotesk Variable", "IBM Plex Sans", sans-serif;
+  --color-ink: #0e1726;
+  --color-ink-2: #17233a;
+  --color-ink-3: #24324d;
+  --color-sand: #f4f2ec;
+  --color-paper: #fbfbf8;
+  --color-line: #dad6cc;
+  --color-muted: #4a5568;
+  --color-soft: #6a7179;
+  --color-money: #b85c12;
+  --color-money-lt: #f2994a;
+  --color-act: #2f5fd0;
+  --color-act-lt: #9dbbf5;
+  --color-ok: #1f7a4d;
+  --color-warn: #a15c00;
+  --color-bad: #b42318;
+}
+
+html, body, #root { height: 100%; }
+body { @apply bg-sand text-ink font-sans antialiased; }
+.num { font-family: var(--font-display); font-variant-numeric: tabular-nums; }
+.card { @apply bg-paper border border-line rounded-2xl; }
+.eyebrow { @apply text-xs font-semibold uppercase tracking-[0.14em] text-money; }
+.btn { @apply inline-flex items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition-colors disabled:opacity-50; }
+.btn-primary { @apply inline-flex items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition-colors disabled:opacity-50 bg-act text-white hover:bg-[#244bb0]; }
+.btn-ghost { @apply inline-flex items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition-colors disabled:opacity-50 border border-line bg-paper hover:bg-white; }
+.chip { @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium; }
+:focus-visible { outline: 2px solid #2f5fd0; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

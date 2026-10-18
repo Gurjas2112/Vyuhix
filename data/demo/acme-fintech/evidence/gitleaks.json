@@ -1,0 +1,4 @@
+[
+  {"RuleID":"db-connection-string","Description":"Database connection string with password","File":"/srv/app/.env","StartLine":3,"Secret":"postgres://app_admin:****@172.30.1.30:5432/acme","Fingerprint":"srv-app-env","Match":"DATABASE_URL=postgres://app_admin:****@..."},
+  {"RuleID":"pgpassword-export","Description":"PGPASSWORD exported in shell history","File":"/home/ops/.bash_history","StartLine":118,"Secret":"report_ro:****","Fingerprint":"bastion-bash-history","Match":"export PGPASSWORD=****"}
+]

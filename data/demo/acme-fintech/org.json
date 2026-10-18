@@ -1,0 +1,11 @@
+{
+  "id": "acme-fintech",
+  "name": "Acme Fintech Pvt Ltd",
+  "label": "Fictional digital lender (demo)",
+  "sector": "bfsi",
+  "city": "Pune",
+  "annual_revenue_inr": 1800000000,
+  "customers": 200000,
+  "current_policy": { "insurer": "Demo insurer", "limit_inr": 50000000, "retention_inr": 2500000, "renewal": "2027-03-31" },
+  "lab_cidrs": ["172.30.0.0/24", "172.30.1.0/24"]
+}
