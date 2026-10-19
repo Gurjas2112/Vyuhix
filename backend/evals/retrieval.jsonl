@@ -1,0 +1,25 @@
+{"id": "r01", "q": "biggest fine a company can get under India's data protection law", "facts": ["₹250 crore"]}
+{"id": "r02", "q": "deadline for telling the national CERT about a cyber incident", "facts": ["6 hours"]}
+{"id": "r03", "q": "how many days of ICT logs must be kept in India", "facts": ["180 days"]}
+{"id": "r04", "q": "time allowed for the detailed breach report to the data protection board", "facts": ["72 hours"]}
+{"id": "r05", "q": "date from which data protection board penalties are enforced", "facts": ["13 May 2027"]}
+{"id": "r06", "q": "what does the exploit prediction score estimate and over what window", "facts": ["30 days"]}
+{"id": "r07", "q": "minimum exploit probability used for a known-exploited flaw on an internet-facing host", "facts": ["0.9"]}
+{"id": "r08", "q": "is the CVSS severity rating used as an exploit probability", "facts": ["severity is not probability", "Not used for likelihood"]}
+{"id": "r09", "q": "by what factor does multi-factor authentication cut a step's success chance", "facts": ["MFA → 0.1"]}
+{"id": "r10", "q": "how many simulated years does the loss model replay", "facts": ["10,000"]}
+{"id": "r11", "q": "maximum length of an attack route the graph search considers", "facts": ["six hops"]}
+{"id": "r12", "q": "statistical error of the expected annual loss estimate", "facts": ["about 2%"]}
+{"id": "r13", "q": "average cost of a data breach for an Indian company", "facts": ["₹22 crore"]}
+{"id": "r14", "q": "how close is the budget optimiser to trying every combination", "facts": ["within 5%"]}
+{"id": "r15", "q": "how much credit does a self-declared control get in the insurability score", "facts": ["declared counts half"]}
+{"id": "r16", "q": "meaning of the tail average loss metric", "facts": ["worst 5%", "worst 1-in-20"]}
+{"id": "r17", "q": "how a loss reached by several routes at once is shared between them", "facts": ["split equally"]}
+{"id": "r18", "q": "why simulate individual steps rather than whole routes", "facts": ["not independent"]}
+{"id": "r19", "q": "how comparisons with and without a fix avoid random noise", "facts": ["same random draws"]}
+{"id": "r20", "q": "strongest defence against malicious text hidden in scanner output", "facts": ["raw evidence never reaches"]}
+{"id": "r21", "q": "why the product leaves premium pricing out", "facts": ["pricing belongs to insurers"]}
+{"id": "r22", "q": "what happens to attack frequency when the IDS sees probing", "facts": ["doubles", "Multiplies attempt frequency"]}
+{"id": "r23", "q": "allowance for attack routes that no scanner can observe", "facts": ["insiders, zero-days"]}
+{"id": "r24", "q": "how many customer records are assumed in the notification cost", "facts": ["2,00,000 records"]}
+{"id": "r25", "q": "likelihood that a breach leads to a regulatory penalty in the demo", "facts": ["10% chance"]}

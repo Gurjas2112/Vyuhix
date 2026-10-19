@@ -1,0 +1,64 @@
+{
+  "run": "20261019-181303-copilot-claude-claude-sonnet-5-5-medium",
+  "mode": "claude",
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "cases": 43,
+  "reps": 2,
+  "graded": 86,
+  "errors": 0,
+  "pass_rate": 1.0,
+  "pass_rate_per_rep": [
+    1.0,
+    1.0
+  ],
+  "pass_rate_stdev": 0.0,
+  "by_category": {
+    "adversarial": {
+      "n": 6,
+      "pass_rate": 1.0
+    },
+    "figures": {
+      "n": 16,
+      "pass_rate": 1.0
+    },
+    "insurance": {
+      "n": 8,
+      "pass_rate": 1.0
+    },
+    "knowledge": {
+      "n": 22,
+      "pass_rate": 1.0
+    },
+    "plan": {
+      "n": 10,
+      "pass_rate": 1.0
+    },
+    "refusal": {
+      "n": 8,
+      "pass_rate": 1.0
+    },
+    "role": {
+      "n": 4,
+      "pass_rate": 1.0
+    },
+    "what-if": {
+      "n": 12,
+      "pass_rate": 1.0
+    }
+  },
+  "tool_selection_rate": 1.0,
+  "clean_draft_rate": 1.0,
+  "latency_ms_p50": 5031,
+  "latency_ms_p95": 6820,
+  "tokens": {
+    "input_tokens": 502,
+    "output_tokens": 23362,
+    "cache_read_input_tokens": 237694,
+    "cache_creation_input_tokens": 41665
+  },
+  "api_requests": 165,
+  "cost_usd_total": 0.3863,
+  "cost_usd_per_question": 0.00449,
+  "failed_cases": []
+}

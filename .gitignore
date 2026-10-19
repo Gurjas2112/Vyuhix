@@ -13,3 +13,5 @@ app_screenshots_screen_recording/_video_tmp/
 # Env / secrets
 .env
 *.local
+# Eval runtime state (fresh database per run, embedding model cache)
+backend/evals/.runtime/

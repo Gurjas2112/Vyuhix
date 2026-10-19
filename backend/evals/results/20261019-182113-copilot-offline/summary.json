@@ -1,0 +1,62 @@
+{
+  "run": "20261019-182113-copilot-offline",
+  "mode": "offline",
+  "model": null,
+  "effort": null,
+  "cases": 43,
+  "reps": 1,
+  "graded": 43,
+  "errors": 0,
+  "pass_rate": 0.9302325581395349,
+  "pass_rate_per_rep": [
+    0.9302325581395349
+  ],
+  "pass_rate_stdev": null,
+  "by_category": {
+    "adversarial": {
+      "n": 3,
+      "pass_rate": 1.0
+    },
+    "figures": {
+      "n": 8,
+      "pass_rate": 1.0
+    },
+    "insurance": {
+      "n": 4,
+      "pass_rate": 1.0
+    },
+    "knowledge": {
+      "n": 11,
+      "pass_rate": 0.7272727272727273
+    },
+    "plan": {
+      "n": 5,
+      "pass_rate": 1.0
+    },
+    "refusal": {
+      "n": 4,
+      "pass_rate": 1.0
+    },
+    "role": {
+      "n": 2,
+      "pass_rate": 1.0
+    },
+    "what-if": {
+      "n": 6,
+      "pass_rate": 1.0
+    }
+  },
+  "tool_selection_rate": 0.9736842105263158,
+  "clean_draft_rate": 1.0,
+  "latency_ms_p50": 5,
+  "latency_ms_p95": 54,
+  "tokens": null,
+  "api_requests": 0,
+  "cost_usd_total": 0.0,
+  "cost_usd_per_question": 0.0,
+  "failed_cases": [
+    "kb-03",
+    "kb-08",
+    "kb-11"
+  ]
+}

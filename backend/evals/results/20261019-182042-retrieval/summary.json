@@ -1,0 +1,60 @@
+{
+  "run": "20261019-182042-retrieval",
+  "queries": 25,
+  "corpus": {
+    "chunks": 124,
+    "documents": 21,
+    "method": "hybrid",
+    "embedding_model": "BAAI/bge-small-en-v1.5",
+    "dense_error": null
+  },
+  "methods": {
+    "bm25": {
+      "hit@1": 0.52,
+      "hit@3": 0.64,
+      "hit@4": 0.76,
+      "mrr@10": 0.6166666666666667,
+      "ms_p50": 0.188400037586689,
+      "misses@4": [
+        "r14",
+        "r18",
+        "r20",
+        "r21",
+        "r24",
+        "r25"
+      ]
+    },
+    "dense": {
+      "hit@1": 0.52,
+      "hit@3": 0.8,
+      "hit@4": 0.8,
+      "mrr@10": 0.645,
+      "ms_p50": 4.322000022511929,
+      "misses@4": [
+        "r15",
+        "r20",
+        "r21",
+        "r23",
+        "r25"
+      ]
+    },
+    "hybrid": {
+      "hit@1": 0.6,
+      "hit@3": 0.8,
+      "hit@4": 0.8,
+      "mrr@10": 0.688,
+      "ms_p50": 3.9216000004671514,
+      "misses@4": [
+        "r15",
+        "r18",
+        "r20",
+        "r23",
+        "r25"
+      ]
+    }
+  },
+  "relevance_gate": {
+    "on_topic_accepted": 1.0,
+    "off_topic_rejected": 1.0
+  }
+}

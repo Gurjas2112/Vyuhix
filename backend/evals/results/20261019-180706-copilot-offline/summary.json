@@ -1,0 +1,74 @@
+{
+  "run": "20261019-180706-copilot-offline",
+  "mode": "offline",
+  "model": null,
+  "effort": null,
+  "cases": 43,
+  "reps": 1,
+  "graded": 43,
+  "errors": 0,
+  "pass_rate": 0.6511627906976745,
+  "pass_rate_per_rep": [
+    0.6511627906976745
+  ],
+  "pass_rate_stdev": null,
+  "by_category": {
+    "adversarial": {
+      "n": 3,
+      "pass_rate": 1.0
+    },
+    "figures": {
+      "n": 8,
+      "pass_rate": 0.75
+    },
+    "insurance": {
+      "n": 4,
+      "pass_rate": 0.25
+    },
+    "knowledge": {
+      "n": 11,
+      "pass_rate": 0.45454545454545453
+    },
+    "plan": {
+      "n": 5,
+      "pass_rate": 0.8
+    },
+    "refusal": {
+      "n": 4,
+      "pass_rate": 0.75
+    },
+    "role": {
+      "n": 2,
+      "pass_rate": 0.5
+    },
+    "what-if": {
+      "n": 6,
+      "pass_rate": 0.8333333333333334
+    }
+  },
+  "tool_selection_rate": 0.7368421052631579,
+  "clean_draft_rate": 1.0,
+  "latency_ms_p50": 4,
+  "latency_ms_p95": 62,
+  "tokens": null,
+  "api_requests": 0,
+  "cost_usd_total": 0.0,
+  "cost_usd_per_question": 0.0,
+  "failed_cases": [
+    "brk-02",
+    "fig-04",
+    "fig-06",
+    "ins-02",
+    "ins-03",
+    "ins-04",
+    "kb-02",
+    "kb-03",
+    "kb-06",
+    "kb-07",
+    "kb-09",
+    "kb-10",
+    "plan-02",
+    "ref-04",
+    "wif-03"
+  ]
+}
