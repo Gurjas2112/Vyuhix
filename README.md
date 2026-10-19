@@ -95,11 +95,11 @@ sequenceDiagram
     T-->>C: engine figures, or passages labelled [S1]..[S4]
   end
   L-->>C: draft answer
-  C->>G: is every figure traceable? does every [S#] exist?
+  C->>G: is every figure traceable? does every cited passage exist?
   alt draft passes
     G-->>U: answer + tools called + evidence + citations
   else draft fails
-    G-->>U: the tool output instead; guardrail event logged for the admin console
+    G-->>U: the tool output instead, and a guardrail event in the admin console
   end
 ```
 
