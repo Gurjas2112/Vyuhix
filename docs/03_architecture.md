@@ -16,13 +16,15 @@ flowchart TB
     MC["montecarlo.py<br/>correlated simulation · attribution"]
     OPT["optimise.py<br/>ILP (PuLP + HiGHS) · verified greedy · frontier"]
     INS["insurance.py · compliance.py"]
-    COP["copilot.py<br/>tools · offline router · Claude mode · grounding"]
+    COP["copilot.py<br/>tools · offline router · Claude mode · grounding + citation checks"]
+    RAG["rag.py<br/>docs index · BM25 + embeddings · hybrid search"]
     FEED["feeds.py<br/>KEV / EPSS snapshots · SOC signal"]
     ST["store.py<br/>SQLite · hash-chained audit"]
   end
   DATA[("data/demo/acme-fintech<br/>evidence · feeds · assumptions")]
   SPA -- "/api (JWT)" --> ROUTES
   ROUTES --> AUTH & ING & ENG & OPT & INS & COP
+  COP --> RAG
   ENG --> MOD --> MC
   OPT --> ENG
   INS --> ENG

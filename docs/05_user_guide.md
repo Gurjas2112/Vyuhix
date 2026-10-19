@@ -74,6 +74,10 @@ DPDP Rules.
 Try the suggestion chips. Each answer shows whether it is **grounded**, the mode (offline or Claude), the
 tools called and the evidence used. Questions about other organisations are refused.
 
+Questions about method or regulation are
+answered from Vyuhix's own docs and research notes. Each claim carries a label such as `[S1]`, and the passages
+appear as chips under the answer.
+
 ![Copilot](../app_screenshots_screen_recording/screenshots/14_copilot_grounded_answers.png)
 
 ## Board report

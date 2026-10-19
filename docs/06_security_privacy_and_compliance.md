@@ -14,7 +14,7 @@ protects itself (level 1 as built, level 2 as designed) and what it helps its us
 | **Input validation** | Pydantic models with `extra="forbid"`, length and range limits; unknown control IDs → 422 |
 | **Untrusted files** | Scanner XML parsed only with `defusedxml` (XXE-safe); unmasked secrets refused at parse time |
 | **Prompt injection** | Instruction-like text in scanner output quarantined and logged; the copilot only ever sees engine output |
-| **AI output** | Numeric grounding check; a model or network failure falls back to the deterministic router |
+| **AI output** | Numeric grounding check by value; citation check on docs answers; brokers get only the coverage and docs tools inside the copilot; a model or network failure falls back to the deterministic router |
 | **Scanning** | CIDR allowlist checked before anything runs; refusals audited and raised as guardrail events |
 | **Audit** | Hash-chained log with SQLite triggers that block UPDATE and DELETE; on-demand chain verification |
 | **Headers** | `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy` |

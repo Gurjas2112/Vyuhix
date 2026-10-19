@@ -47,7 +47,7 @@ curl -s -X POST localhost:8000/api/run -H "authorization: Bearer $TOKEN" -H 'con
 
 | Method | Path | Body | Returns |
 |---|---|---|---|
-| POST | `/copilot` | `{question}` | `{answer, mode, grounded, latency_ms, tools[], evidence[]}` |
+| POST | `/copilot` | `{question}` | `{answer, mode, grounded, latency_ms, tools[], evidence[], citations[], blocked, usage}`. `citations` lists the docs passages the answer cites; `blocked` lists figures or citations the guardrails rejected; `usage` holds token counts in Claude mode. Brokers can use only the coverage and docs-search tools |
 
 ## Admin (platform admin)
 

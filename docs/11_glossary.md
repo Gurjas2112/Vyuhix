@@ -15,11 +15,14 @@
 | **Evidence ID** | A stable reference to the finding that justifies an edge, e.g. `nuclei:CVE-2021-41773` |
 | **FAIR** | Factor Analysis of Information Risk: loss event frequency × loss magnitude |
 | **Frontier** | The curve of best achievable loss for each budget |
-| **Grounding check** | The rule that every number in a copilot answer must appear in that turn's tool output |
+| **Citation check** | The rule that every `[S#]` label in a copilot answer must point at a passage the docs search returned |
+| **Grounding check** | The rule that every number in a copilot answer must equal, by value, a number in that turn's tool output or in the user's question |
+| **Hybrid search** | Docs retrieval that fuses keyword (BM25) and embedding rankings with reciprocal-rank fusion |
 | **Insurability score** | 0–100, weighted by controls insurers ask about; evidenced counts fully, declared counts half |
 | **KEV** | CISA's Known Exploited Vulnerabilities catalogue: CVEs confirmed exploited in the wild |
 | **Loss-exceedance curve** | For each amount, the chance a year's loss is at least that much |
 | **Monte Carlo** | Estimating outcomes by simulating many random scenarios |
+| **RAG** | Retrieval-augmented generation: the copilot searches Vyuhix's docs and quotes the passages it found, with citations |
 | **PERT distribution** | A range defined by low, most likely and high values |
 | **Residual entry** | A deliberate allowance for routes no scan can see (insiders, zero-days) |
 | **ROSI** | Return on security investment: (loss removed − cost) / cost |

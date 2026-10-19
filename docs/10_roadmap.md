@@ -3,8 +3,8 @@
 ## Level 1: proof of concept (this repository)
 
 Synthetic organisation; recorded tool outputs in real formats; deterministic engine; budget optimiser;
-insurance and compliance views; grounded copilot (offline, or Claude with a key); roles; hash-chained
-audit; 38 tests; screenshots and a video.
+insurance and compliance views; grounded copilot (offline, or Claude with a key) with cited docs search; roles; hash-chained
+audit; 47 tests; a copilot and retrieval eval harness; screenshots and a video.
 
 ## Level 2: live prototype
 
