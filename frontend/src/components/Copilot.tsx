@@ -6,13 +6,14 @@ import { useRisk } from '../App'
 type Msg = { role: 'user' | 'bot'; text: string; meta?: any }
 
 const SUGGEST: Record<string, string[]> = {
-  broker: ['Are they adequately insured?', 'What limit would cover the 1-in-20-year loss?'],
-  default: ['What is our biggest risk?', 'What if we enforce MFA on admins?', 'We have 5 lakh budget, what should we buy?', 'Explain P2', "What is HDFC's cyber risk?"],
+  broker: ['Are they adequately insured?', 'What limit would cover the 1-in-20-year loss?', 'How is the insurability score weighted?'],
+  default: ['What is our biggest risk?', 'What if we enforce MFA on admins?', 'We have 5 lakh budget, what should we buy?', 'Explain P2',
+    'What does the DPDP Act say about penalties?', "What is HDFC's cyber risk?"],
 }
 
 export default function Copilot({ onClose }: { onClose: () => void }) {
   const { user } = useRisk()
-  const [msgs, setMsgs] = useState<Msg[]>([{ role: 'bot', text: 'Ask about losses, paths, what-ifs, budgets or insurance. Every figure I give comes from the engine and is checked before you see it.' }])
+  const [msgs, setMsgs] = useState<Msg[]>([{ role: 'bot', text: 'Ask about losses, paths, what-ifs, budgets, insurance, or how the model and Indian regulation work. Every figure I give comes from the engine and every source from the docs, and both are checked before you see them.' }])
   const [q, setQ] = useState('')
   const [busy, setBusy] = useState(false)
   const end = useRef<HTMLDivElement>(null)
@@ -34,7 +35,7 @@ export default function Copilot({ onClose }: { onClose: () => void }) {
       <div className="px-4 py-3 border-b border-line flex items-center gap-2">
         <div className="flex-1">
           <div className="font-display font-bold">Copilot</div>
-          <div className="text-[11px] text-soft">Tool-calling · numbers grounded in engine output</div>
+          <div className="text-[11px] text-soft">Tool-calling · numbers grounded in engine output · docs answers cited</div>
         </div>
         <button onClick={onClose} aria-label="Close copilot" className="p-1 rounded hover:bg-line/50"><X className="size-4" /></button>
       </div>
@@ -50,7 +51,10 @@ export default function Copilot({ onClose }: { onClose: () => void }) {
                     : <span className="chip bg-[#fbe4e1] text-bad"><ShieldAlert className="size-3" /> blocked figure</span>}
                   <span className="chip bg-line/60 text-muted">{m.meta.mode}</span>
                   {m.meta.tools.map((t: any, j: number) => <code key={j} className="chip bg-ink text-sand font-mono">{t.tool}()</code>)}
-                  {m.meta.evidence.slice(0, 4).map((e: string) => <code key={e} className="chip bg-[#e4ebfb] text-act font-mono">{e}</code>)}
+                  {m.meta.evidence.filter((e: string) => !e.startsWith('doc:')).slice(0, 4).map((e: string) => <code key={e} className="chip bg-[#e4ebfb] text-act font-mono">{e}</code>)}
+                  {(m.meta.citations ?? []).map((c: any) => (
+                    <span key={c.label} className="chip bg-[#e4ebfb] text-act" title={c.id}>[{c.label}] {c.title} · {c.section}</span>
+                  ))}
                 </div>
               )}
             </div>

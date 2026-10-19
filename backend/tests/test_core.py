@@ -6,10 +6,11 @@ import tempfile
 import pytest
 
 os.environ.setdefault("VYUHIX_RUNTIME_DIR", tempfile.mkdtemp(prefix="rf-test-"))
+os.environ["ANTHROPIC_API_KEY"] = ""                 # tests never call the paid API; the eval harness does
 
 from fastapi.testclient import TestClient  # noqa: E402
 
-from vyuhix import copilot, engine, ingest, optimise, store  # noqa: E402
+from vyuhix import copilot, engine, ingest, optimise, rag, store  # noqa: E402
 from vyuhix.main import app  # noqa: E402
 from vyuhix.model import ModelError, validate  # noqa: E402
 from vyuhix.money import group_indian, inr  # noqa: E402
@@ -119,6 +120,59 @@ def test_grounding_rejects_invented_numbers():
 
 def test_copilot_refuses_other_organisations():
     assert "can't answer" in copilot.offline("What is HDFC's cyber risk?")[0]
+
+
+def test_grounding_compares_figures_by_value():
+    # the user's own figure may be repeated, in any notation
+    assert copilot.ungrounded("With your ₹5 lakh budget", ["Best plan for ₹5.0 L"], "We have 5 lakh") == []
+    assert copilot.ungrounded("₹1 L stays unspent", ["unspent ₹1.0 L"]) == []
+    assert copilot.ungrounded("₹5,00,000 budget", [], "budget of 5 lakh") == []
+    # arithmetic the model did itself is still blocked
+    assert copilot.ungrounded("₹1 L stays unspent", ["Best plan for ₹5.0 L. Cost ₹4.0 L."], "We have 5 lakh") == ["₹1 L"]
+    assert copilot.ungrounded("about 5% lower", ["EAL ₹3.06 Cr"]) == ["5%"]
+
+
+def test_plan_tool_reports_unspent_budget():
+    assert "Cost ₹4.0 L; unspent ₹1.1 L" in copilot.t_optimise(500000)["text"]   # ₹3.95 L spent: "₹1 L" would be wrong
+
+
+def test_invented_citations_are_caught():
+    assert copilot.bad_citations("Penalties reach ₹250 crore [S1][S3].", 4) == []
+    assert copilot.bad_citations("As stated in [S7].", 4) == ["[S7]"]
+    assert copilot.bad_citations("No sources [S1].", 0) == ["[S1]"]
+
+
+def test_brokers_cannot_reach_attack_paths_through_the_copilot():
+    r = copilot.ask("For the insurance renewal, explain P2", "test", "broker")
+    assert r["tools"] == [] and "outside what your role" in r["answer"]
+    assert copilot.ask("Explain P2", "test", "org_admin")["tools"][0]["tool"] == "explain_path"
+
+
+# ── knowledge retrieval (RAG) ────────────────────────────────────────────────────────────
+def test_docs_are_chunked_by_section():
+    chunks = rag.chunk_markdown("x.md", "# Title\n\nintro\n\n## First part\n\nalpha\n\n### Sub\n\nbeta\n")
+    assert [(c["section"], c["text"]) for c in chunks] == [("Overview", "intro"), ("First part", "alpha"), ("Sub", "beta")]
+    assert chunks[1]["id"] == "x.md#first-part" and chunks[0]["title"] == "Title"
+    assert all(len(c["text"]) <= rag.MAX_CHARS for c in rag.corpus())
+
+
+@pytest.mark.parametrize("method", ["bm25", "hybrid"])
+def test_retrieval_finds_the_regulation_note(method):
+    hits = rag.search("What penalty does the DPDP Act allow for poor security safeguards?", k=3, method=method)
+    assert any("₹250 crore" in h["text"] for h in hits)    # several notes state it; the copilot reads the top passages
+
+
+def test_off_topic_questions_are_not_answered_from_docs():
+    if rag.status()["method"] != "hybrid":
+        pytest.skip("embedding model unavailable")
+    assert not rag.relevant(rag.search("What is the capital of France?", k=1)[0])
+    assert rag.relevant(rag.search("How quickly must incidents be reported to CERT-In?", k=1)[0])
+
+
+def test_offline_knowledge_answers_cite_their_source():
+    r = copilot.ask("What does the DPDP Act say about penalties?", "test")
+    assert r["grounded"] and r["tools"][0]["tool"] == "search_knowledge"
+    assert r["citations"] and "₹250 crore" in r["answer"]
 
 
 # ── money formatting ─────────────────────────────────────────────────────────────────────

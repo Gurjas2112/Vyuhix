@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import threading
 import time
 from contextlib import asynccontextmanager
 
@@ -11,7 +12,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 
-from . import auth, compliance, copilot, engine, feeds, ingest, insurance, optimise, store
+from . import auth, compliance, copilot, engine, feeds, ingest, insurance, optimise, rag, store
 from .auth import ORG_ALL, ORG_READ, ORG_WRITE, require
 from .money import inr
 from .settings import ANTHROPIC_API_KEY, CORS_ORIGINS, FRONTEND_DIST
@@ -21,6 +22,7 @@ async def lifespan(_app):
     store.init()
     auth.seed_users()
     engine.run()                                   # warm the cache
+    threading.Thread(target=rag.index, daemon=True).start()   # build the docs index without blocking startup
     if not store.scalar("select count(*) from audit_log"):
         store.audit("system", "startup", detail={"version": "0.1.0"})
     yield
@@ -171,7 +173,7 @@ def ask(body: AskIn, user: dict = Depends(require(*ORG_ALL))):
     if user["role"] == "broker" and not any(w in body.question.lower() for w in ("insur", "cover", "limit", "policy", "gap")):
         return {"answer": "Broker access is limited to the insurance view. Ask about coverage, limits or the gap.",
                 "mode": "policy", "grounded": True, "latency_ms": 0, "tools": [], "evidence": []}
-    return copilot.ask(body.question, user["sub"])
+    return copilot.ask(body.question, user["sub"], user["role"])
 
 
 @app.get("/api/report")
@@ -202,6 +204,7 @@ def admin_overview(user: dict = Depends(ADMIN)):
         "alerts": store.rows("select * from alerts order by id desc limit 10"),
         "audit_rows": store.scalar("select count(*) from audit_log"),
         "llm_mode": "claude" if ANTHROPIC_API_KEY else "offline",
+        "knowledge": rag.status(),
     }
 
 
